@@ -35,7 +35,8 @@ class CatSerializer(serializers.ModelSerializer):
 
         for achievement in achievements:
             current_achievement, status = Achievement.objects.get_or_create(
-                **achievement)
+                **achievement
+            )
             AchievementCat.objects.create(
                 achievement=current_achievement, cat=cat)
         return cat
