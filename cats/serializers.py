@@ -6,6 +6,15 @@ import webcolors
 from .models import Achievement, AchievementCat, Cat, Owner
 
 
+CHOICES = (
+        ('Gray', 'Серый'),
+        ('Black', 'Чёрный'),
+        ('White', 'Белый'),
+        ('Ginger', 'Рыжий'),
+        ('Mixed', 'Смешанный'),
+    )
+
+
 class Hex2NameColor(serializers.Field):
     def to_representation(self, value):
         return value
@@ -84,3 +93,11 @@ class OwnerSerializer(serializers.ModelSerializer):
             'last_name',
             'cats'
         )
+
+
+class CatListSerializer(serializers.ModelSerializer):
+    color = serializers.ChoiceField(choices=CHOICES)
+
+    class Meta:
+        model = Cat
+        fields = ('id', 'name', 'color')
